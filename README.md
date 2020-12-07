@@ -11,4 +11,6 @@ This application is used to track my activities expenses
 - [Semantic UI](https://github.com/Semantic-Org/Semantic-UI)
 - CSS Grid Layout
 - Flexbox Layout
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Jest](https://jestjs.io/)
 

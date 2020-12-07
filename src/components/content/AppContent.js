@@ -15,21 +15,6 @@ const AppContent = () => {
                     <p>Description: Workout with Andrew. Every Tuesday and Thursday at 7:30am</p>
                     <p>Balance : $15</p>
                 </div>
-                <div style={{display:'flex', flexFlow: 'column', border: '2px solid', width: '350px', padding: '15px', margin: '10px', borderRadius: '15px'}}>
-                    <h3>Workout</h3>
-                    <p>Description: Workout with Andrew. Every Tuesday and Thursday at 7:30am</p>
-                    <p>Balance : $15</p>
-                </div>
-                <div style={{display:'flex', flexFlow: 'column', border: '2px solid', width: '350px', padding: '15px', margin: '10px', borderRadius: '15px'}}>
-                    <h3>Workout</h3>
-                    <p>Description: Workout with Andrew. Every Tuesday and Thursday at 7:30am</p>
-                    <p>Balance : $15</p>
-                </div>
-                <div style={{display:'flex', flexFlow: 'column', border: '2px solid', width: '350px', padding: '15px', margin: '10px', borderRadius: '15px'}}>
-                    <h3>Workout</h3>
-                    <p>Description: Workout with Andrew. Every Tuesday and Thursday at 7:30am</p>
-                    <p>Balance : $15</p>
-                </div>
             </div>
         </div>
     );

@@ -7,9 +7,9 @@ import AppFooter from './components/footer/AppFooter';
 function App() {
   return (
     <div className='App-container'>
-      <AppHeader />
-      <AppContent />
-      <AppFooter />
+      <AppHeader data-testid='app-header' />
+      <AppContent data-testid='app-content' />
+      <AppFooter data-testid='app-footer' />
     </div>
   );
 }
