@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ app-layout ]
+    branches: [ feature/* ]
   pull_request:
     branches: [ develop ]
 
