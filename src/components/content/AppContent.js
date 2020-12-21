@@ -1,33 +1,40 @@
 import React from 'react';
+import ActivityList from './ActivityList';
 
-const AppContent = () => {
-    return (
-        <div style={{display: 'flex', flexFlow: 'column', alignItems: 'center', margin: '15px 350px'}}>
-            <h2>Activities & Expenses</h2>
-            <div style={{display: 'flex', flexFlow: 'wrap'}}>
-                <div style={{display:'flex', flexFlow: 'column', border: '2px solid', width: '350px', padding: '15px', margin: '10px', borderRadius: '15px'}}>
-                    <h3>Martial Art</h3>
-                    <p>Description: Martial art activity with Mark. Every monday at 6pm</p>
-                    <p>Balance : $0</p>
-                    <p>Last balance upate: 12/08/2020 11:20 PM</p>
-                    <div style={{display: 'flex', flexFlow: 'row', justifyContent:'flex-end', padding: '5px'}}>
-                        <button>Add Expense</button>
-                        <button>Pay Balance</button>
-                    </div>
-                </div>
-                <div style={{display:'flex', flexFlow: 'column', border: '2px solid', width: '350px', padding: '15px', margin: '10px', borderRadius: '15px'}}>
-                    <h3>Workout</h3>
-                    <p>Description: Workout with Andrew. Every Tuesday and Thursday at 7:30am</p>
-                    <p>Balance : $30</p>
-                    <p>Last balance upate: 12/08/2020 11:20 PM</p>
-                    <div style={{display: 'flex', flexFlow: 'row', justifyContent:'flex-end', padding: '5px'}}>
-                        <button>Add Expense</button>
-                        <button>Pay Balance</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
+const ActivityListData = [
+    {
+        id: 1,
+        title: 'Martial Arts',
+        description: 'Martial art activity with Mark. Every monday at 6pm',
+        balance: '$0',
+        lastUpdatedTimestamp: '12/08/2020 11:20 PM'
+    },
+    {
+        id: 2,
+        title: 'Workout',
+        description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
+        balance: '$15',
+        lastUpdatedTimestamp: '12/17/2020 10:30 AM'
+    },
+    // {
+    //     id: 3,
+    //     title: 'Workout',
+    //     description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
+    //     balance: '$15',
+    //     lastUpdatedTimestamp: '12/17/2020 10:30 AM'
+    // },
+    // {
+    //     id: 4,
+    //     title: 'Workout',
+    //     description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
+    //     balance: '$15',
+    //     lastUpdatedTimestamp: '12/17/2020 10:30 AM'
+    // }
+];
+
+const handleAddExpenseClick = () => console.log('Added expense');
+const handlePayBalanceClick = () => console.log('Paid balance');
+
+const AppContent = () => <ActivityList activities={ActivityListData} onAddExpenseClick={handleAddExpenseClick} onPayBalanceClick={handlePayBalanceClick} />;
 
 export default AppContent;
