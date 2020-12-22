@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import { Button } from 'semantic-ui-react';
+// import { Button } from 'semantic-ui-react';
 import { Icon } from 'semantic-ui-react';
-import { Dropdown, Menu } from 'semantic-ui-react';
 
 const Activity = ({...props}) => {
     const [activityMenu, setActivityMenu] = useState(false);
@@ -16,12 +15,12 @@ const Activity = ({...props}) => {
             </div>
             {
                 activityMenu &&
-                <div style={{display: 'flex', flexFlow: 'column', border: '1px solid #66b2b2', borderRadius:10, width: 130, padding: 5, background:'#fbfdfb', position: 'relative', zIndex: 2, bottom: 10, left: 200}}>
-                    <span style={{margin: 5}}>
+                <div style={{display: 'flex', flexFlow: 'column', fontFamily: 'monospace', border: '1px solid #66b2b2', borderRadius:5, width: 130, background:'#fbfdfb', position: 'relative', zIndex: 2, bottom: 10, left: 200}}>
+                    <span style={{cursor: 'pointer', padding: 5, borderBottom: '1px solid #66b2b2'}} onClick={() => onAddExpenseClick()}>
                         <Icon name='dollar' />
                         Add Expense
                     </span>
-                    <span style={{margin: 5}}>
+                    <span style={{cursor: 'pointer', padding: 5, borderBottom: '1px solid #66b2b2'}} onClick={() => onPayBalanceClick()}>
                         <Icon name='payment' />
                         Pay Balance    
                     </span>
