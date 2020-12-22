@@ -5,7 +5,7 @@ const ActivityListData = [
     {
         id: 1,
         title: 'Martial Arts',
-        description: 'Martial art activity with Mark. Every monday at 6pm',
+        description: 'Martial art activity with Mark. Every Monday at 6pm',
         balance: '$0',
         lastUpdatedTimestamp: '12/08/2020 11:20 PM'
     },
