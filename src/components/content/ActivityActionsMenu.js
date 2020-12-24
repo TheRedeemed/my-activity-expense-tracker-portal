@@ -4,6 +4,19 @@ import MenuItem from '../util/MenuItem';
 
 const ActivityActionsMenu = ({ ...props }) => {
     const { onAddExpenseClick, onPayBalanceClick } = props;
+    const menuItems = [
+        {
+            iconName: 'dollar',
+            displayText: 'Add Expense',
+            func: onAddExpenseClick
+        },
+        {
+            iconName: 'payment',
+            displayText: 'Pay Balance',
+            func: onPayBalanceClick
+        }
+    ];
+
     return (
         <Popup
             trigger={<span style={{ cursor: 'pointer', border: '2px solid', borderRadius: 10, padding: '5px 2px 5px 5px' }}> <Icon name='ellipsis vertical' /></span>}
@@ -12,13 +25,15 @@ const ActivityActionsMenu = ({ ...props }) => {
             positionFixed
             position='bottom right'
         >
-            <Grid divided='vertically' centered style={{width: 125}}>
-                <Grid.Row style={{color: '#00467d', fontWeight:'bold'}}>
-                    <MenuItem iconName='dollar' displayText='Add Expense' func = {onAddExpenseClick} />
-                </Grid.Row>
-                <Grid.Row style={{color: '#00467d', fontWeight:'bold'}}>
-                    <MenuItem iconName='payment' displayText='Pay Balance' func = {onPayBalanceClick} />
-                </Grid.Row>
+            <Grid divided='vertically' centered style={{ width: 125 }}>
+                {
+                    menuItems.map((menuItem) => {
+                        const { iconName, displayText, func } = menuItem
+                        return <Grid.Row key={iconName} style={{ color: '#00467d', fontWeight: 'bold'}}>
+                                   <MenuItem iconName={iconName} displayText={displayText} func={func} />
+                                </Grid.Row>
+                    })
+                }
             </Grid>
         </Popup>
     );

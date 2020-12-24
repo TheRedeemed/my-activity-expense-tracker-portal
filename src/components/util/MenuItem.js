@@ -5,7 +5,7 @@ const MenuItem = ({...props}) => {
     const { iconName, displayText, func } = props
     return(
         <span style={{ cursor: 'pointer'}} onClick={() => func()}>
-            <Icon name={iconName} />
+            <Icon name={iconName} data-testid='menu-item-icon' />
             {displayText}
         </span>
     );
