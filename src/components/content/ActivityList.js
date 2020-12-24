@@ -5,8 +5,8 @@ const ActivityList = ({...props}) => {
     const { activities, onAddExpenseClick, onPayBalanceClick } = props;
 
     return (
-        <div style={{display: 'flex', flexFlow: 'column', alignItems: 'center', margin: '15px 300px'}}>
-            <h2 style={{fontSize: 'xx-large', fontFamily: 'monospace'}} >Activities & Expenses</h2>
+        <div style={{display: 'flex', flexFlow: 'column', alignItems: 'center', margin: '50px 200px'}}>
+            <h2 style={{fontSize: 'xx-large', fontFamily: 'monospace', color: '#00467d', fontWeight: 'bold'}} >ACTIVITIES & EXPENSES</h2>
             <div style={{display: 'flex', flexFlow: 'wrap'}}>
                 {
                     activities.map((activity) => 

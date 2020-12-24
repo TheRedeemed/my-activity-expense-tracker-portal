@@ -40,5 +40,5 @@
 .App-container {
   display: grid;
   grid-template-rows: [header-start] 80px [header-end content-start] minmax(250px, 807px) [content-end footer-start] 50px [footer-end];
-  background-color: #fbfdfb;
+  background-color: #f8f8f8;
 }
