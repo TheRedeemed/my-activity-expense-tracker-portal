@@ -2,7 +2,8 @@
 
 ## Description
 
-This application is used to track my activities expenses
+This application is used to track my activities expenses.
+This portal interacts with [my-activity-expense-tracker-service](https://github.com/TheRedeemed/my-activity-expense-tracker-service), a Spring boot microservice
 
 ## Techonology Stack
 
@@ -13,4 +14,6 @@ This application is used to track my activities expenses
 - Flexbox Layout
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 - [Jest](https://jestjs.io/)
+- [React-moment](https://www.npmjs.com/package/react-moment)
+- [Moment.js](https://momentjs.com/)
 

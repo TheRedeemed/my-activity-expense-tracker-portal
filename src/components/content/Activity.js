@@ -1,4 +1,5 @@
 import React from 'react';
+import Moment from 'react-moment';
 import ActivityActionsMenu from './ActivityActionsMenu';
 
 const Activity = ({...props}) => {
@@ -12,9 +13,13 @@ const Activity = ({...props}) => {
             <div style={{padding: 15, fontFamily: 'monospace'}}>
                 <p style={{color: '#104879'}}>{description}</p>
                 <p style={{display: 'flex', flexFlow: 'column', alignItems: 'center'}}>
-                    <span style={{margin: '20px 0px', padding: 10, fontSize: 40, color: '#104879'}}>{balance}</span>
+                    <span style={{margin: '20px 0px', padding: 10, fontSize: 40, color: '#104879'}}>${balance}</span>
                     <span style={{color: '#104879'}}>balance as of:</span>
-                    <span style={{color: '#104879', fontWeight: 'bold'}}>{lastUpdatedTimestamp}</span>
+                    <span style={{color: '#104879', fontWeight: 'bold'}}>
+                        <Moment format="ddd MMM Do YYYY LT z">
+                            {lastUpdatedTimestamp}
+                        </Moment>
+                    </span>
                 </p>
             </div>
         </div>

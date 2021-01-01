@@ -1,26 +1,28 @@
 import React from 'react';
 import Activity from './Activity';
 
-const ActivityList = ({...props}) => {
+const ActivityList = ({ ...props }) => {
     const { activities, onAddExpenseClick, onPayBalanceClick } = props;
 
+    const getActivityList = () => {
+        return activities && activities.length > 0 ?
+            activities.map((activity) =>
+                <Activity
+                    key={activity.title}
+                    title={activity.title}
+                    description={activity.description}
+                    balance={activity.balance}
+                    lastUpdatedTimestamp={activity.updatedTimestamp}
+                    onAddExpenseClick={onAddExpenseClick}
+                    onPayBalanceClick={onPayBalanceClick}
+                />) :
+            <h1>Activity List is empty</h1>
+    };
+
     return (
-        <div style={{display: 'flex', flexFlow: 'column', alignItems: 'center', margin: '50px 200px'}}>
-            <h2 style={{fontSize: 'xx-large', fontFamily: 'monospace', color: '#00467d', fontWeight: 'bold'}} >ACTIVITIES & EXPENSES</h2>
-            <div style={{display: 'flex', flexFlow: 'wrap'}}>
-                {
-                    activities.map((activity) => 
-                        <Activity 
-                            key = {activity.id}
-                            title = {activity.title}
-                            description = {activity.description}
-                            balance = {activity.balance}
-                            lastUpdatedTimestamp = {activity.lastUpdatedTimestamp}
-                            onAddExpenseClick = {onAddExpenseClick} 
-                            onPayBalanceClick = {onPayBalanceClick}
-                        />)
-                }
-            </div>
+        <div>
+            <h2 style={{ fontSize: 'xx-large', fontFamily: 'monospace', color: '#00467d', fontWeight: 'bold', textAlign: 'center', marginBottom: 25 }} >ACTIVITIES & EXPENSES</h2>
+            <div style={{ display: 'flex', flexFlow: 'wrap' }}>{ getActivityList() }</div>
         </div>
     );
 };

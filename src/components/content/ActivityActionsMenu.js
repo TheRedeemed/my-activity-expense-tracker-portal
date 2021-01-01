@@ -19,7 +19,7 @@ const ActivityActionsMenu = ({ ...props }) => {
 
     return (
         <Popup
-            trigger={<span style={{ cursor: 'pointer', border: '2px solid', borderRadius: 10, padding: '5px 2px 5px 5px' }}> <Icon name='ellipsis vertical' /></span>}
+            trigger={<span style={{ cursor: 'pointer', border: '2px solid', borderRadius: 10, padding: '5px 2px 5px 5px' }}> <Icon name='ellipsis vertical' data-testid='activity-action-menu' /></span>}
             style={{ position: 'relative', left: 5 }}
             on='click'
             positionFixed
