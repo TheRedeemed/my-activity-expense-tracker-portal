@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ActivityList from './ActivityList';
 import Request from '../util/Request';
-import { Loader, Message, Icon } from 'semantic-ui-react';
+import NewActivityModal from '../modals/NewActivityModal';
+import { Loader, Message } from 'semantic-ui-react';
 
 // const ActivityListData = [
 //     {
@@ -70,17 +71,22 @@ import { Loader, Message, Icon } from 'semantic-ui-react';
 // ];
 
 const AppContent = () => {
+    const activityRequestStatus = {
+        isSubmitting: false,
+        hasError: false,
+        isSuccessful: false
+    }
     const [loading, setLoading] = useState(true);
     const [errMsg, setErrMsg] = useState('');
     const [activityList, setActivityList] = useState([]);
+    const [activityRequestFlags, setActivityRequestFlags] = useState(activityRequestStatus);
 
     useEffect(() => {
         getActivityList();
     }, []);
 
     const getActivityList = async () => {
-        let { data, error } = await Request.sendRequest({ requestUrl: 'http://localhost:8080/activity-expense' });
-        
+        let { data, error } = await Request.sendRequest({ url: 'http://localhost:8080/activity/all', method: 'GET' });
         if (data) {
             setActivityList(data);
             setLoading(false);
@@ -92,23 +98,48 @@ const AppContent = () => {
 
     const getAppContent = () => {
         return errMsg ?
-            <Message negative style={{ fontSize: 'xx-large', fontFamily: 'monospace', textAlign: 'center' }}>
-                <Message.Header>
-                    <Icon name='exclamation circle' data-testid='error-icon' />
-                Error
-            </Message.Header>
-                <p>{errMsg}</p>
-            </Message> :
-            <ActivityList activities={activityList} onAddExpenseClick={handleAddExpenseClick} onPayBalanceClick={handlePayBalanceClick} />
+            <div style={{width:'25%'}}>
+                <Message
+                    error
+                    header='Bummer!'
+                    icon='frown outline'
+                    content={errMsg}
+                />
+            </div>  :
+            <ActivityList 
+                activities={activityList} 
+                onAddExpenseClick={handleAddExpenseClick} 
+                onPayBalanceClick={handlePayBalanceClick} 
+            />
     }
 
     const handleAddExpenseClick = () => console.log('Added expense');
     const handlePayBalanceClick = () => console.log('Paid balance');
+    const handleAddActivityClick = async (activity) => {
+        console.log('submitting add activity request', activity);
+        activity.balance = 0;
+        setActivityRequestFlags({ isSubmitting: true });
+        let { data, error } = await Request.sendRequest({ url: 'http://localhost:8080/activity/new', method: 'POST', request: activity });
+        if (data) {
+            setActivityRequestFlags({ isSubmitting: false, hasError: false, isSuccessful: true });
+            removeNotification();
+        } else if (error) {
+            setActivityRequestFlags({ isSubmitting: false, hasError: true, isSuccessful: false });
+            removeNotification();
+        }
+    };
+
+    const removeNotification = () => {
+        setTimeout(() => {
+            setActivityRequestFlags({ isSubmitting: false, hasError: false, isSuccessful: false });
+        }, 3000);
+    }
 
     return (
         <div>
-            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'baseline' }}>
-                <h1 style={{ fontSize: 'xxx-large', fontFamily: 'monospace', color: '#00467d', fontWeight: 'bold', margin: '0px 25px' }}>Hello, ABDOUL</h1>
+            <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', justifyContent: 'space-between', margin: '0px 55px' }}>
+                <h1 style={{ fontSize: 'xxx-large', fontFamily: 'monospace', color: '#00467d', fontWeight: 'bold', margin: 0 }}>Hello, ABDOUL</h1>
+                <NewActivityModal onAddActivityClick={handleAddActivityClick} activityRequestFlags={activityRequestFlags} />
             </div>
             {
                 loading ?
