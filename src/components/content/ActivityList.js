@@ -22,7 +22,7 @@ const ActivityList = ({ ...props }) => {
     return (
         <div>
             <h2 style={{ fontSize: 'xx-large', fontFamily: 'monospace', color: '#00467d', fontWeight: 'bold', textAlign: 'center', marginBottom: 25 }} >ACTIVITIES & EXPENSES</h2>
-            <div style={{ display: 'flex', flexFlow: 'wrap' }}>{ getActivityList() }</div>
+            <div style={{ display: 'flex', flexFlow: 'wrap', justifyContent: 'center', overflow: 'auto', height: '650px'}}>{ getActivityList() }</div>
         </div>
     );
 };

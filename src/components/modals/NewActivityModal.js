@@ -14,18 +14,24 @@ const NewActivityButton = ({ ...props }) => {
 const NewActivityModal = ({ ...props }) => {
     const [open, setOpen] = useState(false);
     const { register, handleSubmit, reset, errors } = useForm();
-    const { onAddActivityClick, activityRequestFlags } = props;
+    const { onAddActivityClick, activityRequestFlags, getActivityList } = props;
     const onSubmit = data => {
         onAddActivityClick(data);
         reset();
     };
 
+    const onCloseOrCancelClick = () => {
+        setOpen(false);
+        getActivityList();
+    };
+
     return (
         <Modal
+            closeIcon
             centered={false}
             open={open}
             trigger={<NewActivityButton />}
-            onClose={() => setOpen(false)}
+            onClose={() => onCloseOrCancelClick()}
             onOpen={() => setOpen(true)}
             closeOnDimmerClick={false}
             closeOnEscape={false}
@@ -39,7 +45,7 @@ const NewActivityModal = ({ ...props }) => {
                         success
                         header='Hooray!'
                         icon='smile outline'
-                        content="Your new activity has been created sucessfully"
+                        content="Your new activity has been created sucessfully. You can add another activity or close this window."
                     />
                 }
 
@@ -90,7 +96,7 @@ const NewActivityModal = ({ ...props }) => {
                         </Form.Field>
                     </Modal.Content>
                     <Modal.Actions style={{ marginTop: 30 }}>
-                        <Button color='grey' onClick={() => setOpen(false)}>
+                        <Button color='grey' onClick={() => onCloseOrCancelClick()}>
                             <Icon name='cancel' /> CANCEL
                         </Button>
                         <Button color='blue' disabled={errors.title || errors.fee || errors.description}>

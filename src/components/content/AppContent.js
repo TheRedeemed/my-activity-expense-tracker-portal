@@ -139,14 +139,18 @@ const AppContent = () => {
         <div>
             <div style={{ display: 'flex', flexFlow: 'row', alignItems: 'center', justifyContent: 'space-between', margin: '0px 55px' }}>
                 <h1 style={{ fontSize: 'xxx-large', fontFamily: 'monospace', color: '#00467d', fontWeight: 'bold', margin: 0 }}>Hello, ABDOUL</h1>
-                <NewActivityModal onAddActivityClick={handleAddActivityClick} activityRequestFlags={activityRequestFlags} />
+                <NewActivityModal 
+                    onAddActivityClick={handleAddActivityClick} 
+                    activityRequestFlags={activityRequestFlags} 
+                    getActivityList={getActivityList}
+                />
             </div>
             {
                 loading ?
-                    <Loader active size='massive'>Loading Activity List...</Loader> :
-                    <div style={{ display: 'flex', flexFlow: 'column', alignItems: 'center', margin: '50px 200px' }}>
-                        {getAppContent()}
-                    </div>
+                <Loader active size='massive'>Loading Activity List...</Loader> :
+                <div style={{margin: '50px 0px'}}>
+                    {getAppContent()}
+                </div>
 
             }
         </div>
