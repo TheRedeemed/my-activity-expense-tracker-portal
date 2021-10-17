@@ -4,78 +4,14 @@ import Request from '../util/Request';
 import NewActivityModal from '../modals/NewActivityModal';
 import { Loader, Message } from 'semantic-ui-react';
 
-// const ActivityListData = [
-//     {
-//         id: 1,
-//         title: 'Martial Arts',
-//         description: 'Martial art activity with Mark. Every Monday at 6pm',
-//         balance: '$0',
-//         updatedTimestamp: '12/08/2020 11:20 PM'
-//     },
-//     {
-//         id: 2,
-//         title: 'Workout',
-//         description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
-//         balance: '$30',
-//         updatedTimestamp: '12/22/2020 10:30 AM'
-//     },
-//     {
-//         id: 2,
-//         title: 'Workout',
-//         description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
-//         balance: '$30',
-//         updatedTimestamp: '12/22/2020 10:30 AM'
-//     },
-//     {
-//         id: 2,
-//         title: 'Workout',
-//         description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
-//         balance: '$30',
-//         updatedTimestamp: '12/22/2020 10:30 AM'
-//     },
-//     {
-//         id: 2,
-//         title: 'Workout',
-//         description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
-//         balance: '$30',
-//         updatedTimestamp: '12/22/2020 10:30 AM'
-//     },
-//     {
-//         id: 2,
-//         title: 'Workout',
-//         description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
-//         balance: '$30',
-//         updatedTimestamp: '12/22/2020 10:30 AM'
-//     },
-//     {
-//         id: 2,
-//         title: 'Workout',
-//         description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
-//         balance: '$30',
-//         updatedTimestamp: '12/22/2020 10:30 AM'
-//     },
-//     {
-//         id: 2,
-//         title: 'Workout',
-//         description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
-//         balance: '$30',
-//         updatedTimestamp: '12/22/2020 10:30 AM'
-//     },
-//     {
-//         id: 2,
-//         title: 'Workout',
-//         description: 'Workout with Andrew. Every Tuesday and Thursday at 7:30am',
-//         balance: '$30',
-//         updatedTimestamp: '12/22/2020 10:30 AM'
-//     }
-// ];
+const API_URL = 'http://localhost:8080/api/v1/activities';
 
 const AppContent = () => {
     const activityRequestStatus = {
         isSubmitting: false,
         hasError: false,
         isSuccessful: false
-    }
+    };
     const [loading, setLoading] = useState(true);
     const [errMsg, setErrMsg] = useState('');
     const [activityList, setActivityList] = useState([]);
@@ -86,7 +22,7 @@ const AppContent = () => {
     }, []);
 
     const getActivityList = async () => {
-        let { data, error } = await Request.sendRequest({ url: 'http://localhost:8080/activity/all', method: 'GET' });
+        let { data, error } = await Request.sendRequest({ url: API_URL, method: 'GET' });
         if (data) {
             setActivityList(data);
             setLoading(false);
@@ -98,7 +34,7 @@ const AppContent = () => {
 
     const getAppContent = () => {
         return errMsg ?
-            <div style={{width:'25%'}}>
+            <div style={{width:'25%', margin: 'auto'}}>
                 <Message
                     error
                     header='Bummer!'
@@ -119,20 +55,16 @@ const AppContent = () => {
         console.log('submitting add activity request', activity);
         activity.balance = 0;
         setActivityRequestFlags({ isSubmitting: true });
-        let { data, error } = await Request.sendRequest({ url: 'http://localhost:8080/activity/new', method: 'POST', request: activity });
+        let { data, error } = await Request.sendRequest({ url: API_URL, method: 'POST', request: activity });
         if (data) {
             setActivityRequestFlags({ isSubmitting: false, hasError: false, isSuccessful: true });
-            removeNotification();
         } else if (error) {
             setActivityRequestFlags({ isSubmitting: false, hasError: true, isSuccessful: false });
-            removeNotification();
         }
     };
 
-    const removeNotification = () => {
-        setTimeout(() => {
-            setActivityRequestFlags({ isSubmitting: false, hasError: false, isSuccessful: false });
-        }, 3000);
+    const removeRequestNotification = () => {
+        setActivityRequestFlags({ isSubmitting: false, hasError: false, isSuccessful: false });
     }
 
     return (
@@ -142,6 +74,7 @@ const AppContent = () => {
                 <NewActivityModal 
                     onAddActivityClick={handleAddActivityClick} 
                     activityRequestFlags={activityRequestFlags} 
+                    removeRequestNotification={removeRequestNotification}
                     getActivityList={getActivityList}
                 />
             </div>

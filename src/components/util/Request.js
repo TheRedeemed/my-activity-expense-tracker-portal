@@ -22,7 +22,7 @@ const sendRequest = async (requestObj) => {
         requestResponse.error = error;
     }
     return requestResponse;
-}
+};
 
 const Request = { sendRequest }
 
