@@ -5,7 +5,7 @@ import ActivityActionsMenu from './ActivityActionsMenu';
 const Activity = ({...props}) => {
     const {title, description, balance, lastUpdatedTimestamp, onAddExpenseClick, onPayBalanceClick} = props;
     return (
-        <div style={{display:'flex', flexFlow: 'column', border: '4px solid #00467d', width: '350px', margin: '15px', borderRadius: '15px'}}>
+        <div style={{display:'flex', flexFlow: 'column', border: '4px solid #00467d', width: '350px', margin: '10px', borderRadius: '15px'}}>
             <div style={{ display:'flex', flexFlow:'row', alignItems: 'baseline', justifyContent: 'space-between', padding: 10, borderBottom: '3px solid #e7eff6', background:'#00467d', color: '#FFF'}}>
                 <span style={{fontSize: 'x-large', fontFamily: 'monospace'}}>{title.toUpperCase()}</span>
                 <ActivityActionsMenu onAddExpenseClick={onAddExpenseClick} onPayBalanceClick={onPayBalanceClick} />

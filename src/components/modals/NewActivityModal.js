@@ -14,18 +14,26 @@ const NewActivityButton = ({ ...props }) => {
 const NewActivityModal = ({ ...props }) => {
     const [open, setOpen] = useState(false);
     const { register, handleSubmit, reset, errors } = useForm();
-    const { onAddActivityClick, activityRequestFlags } = props;
+    const { onAddActivityClick, activityRequestFlags, removeRequestNotification, getActivityList } = props;
     const onSubmit = data => {
         onAddActivityClick(data);
         reset();
     };
 
+    const onCloseOrCancelClick = () => {
+        setOpen(false);
+        getActivityList();
+    };
+
+    const isDisabled = (errors.title || errors.fee || errors.description) ? true : false;
+
     return (
         <Modal
+            closeIcon
             centered={false}
             open={open}
             trigger={<NewActivityButton />}
-            onClose={() => setOpen(false)}
+            onClose={() => onCloseOrCancelClick()}
             onOpen={() => setOpen(true)}
             closeOnDimmerClick={false}
             closeOnEscape={false}
@@ -39,7 +47,7 @@ const NewActivityModal = ({ ...props }) => {
                         success
                         header='Hooray!'
                         icon='smile outline'
-                        content="Your new activity has been created sucessfully"
+                        content="Your new activity has been created sucessfully. You can add another activity or close this window."
                     />
                 }
 
@@ -59,20 +67,20 @@ const NewActivityModal = ({ ...props }) => {
                         <Form.Group widths='12'>
                             <Form.Field required width='9'>
                                 <label>Title</label>
-                                <input name='title' placeholder='Title' ref={register({ required: true })} /> {/* the register function is used to register the input into the hook */}
+                                <input data-testid='titleInput' name='title' placeholder='Title' ref={register({ required: true })} onClick={() => removeRequestNotification()} /> {/* the register function is used to register the input into the hook */}
                                 {
                                     errors.title &&
-                                    <div class="ui pointing up prompt label">
+                                    <div className="ui pointing up prompt label">
                                         Title is required
                                     </div>
                                 }
                             </Form.Field>
                             <Form.Field required width='3'>
                                 <label>Fee</label>
-                                <input name='fee' placeholder='Fee' type='number' ref={register({ min: 1, required: true })} />
+                                <input data-testid='feeInput' name='fee' placeholder='Fee' type='number' ref={register({ min: 1, required: true })} />
                                 {
                                     errors.fee &&
-                                    <div class="ui pointing up prompt label" role="alert">
+                                    <div className="ui pointing up prompt label" role="alert">
                                         Fee is required
                                     </div>
                                 }
@@ -80,20 +88,20 @@ const NewActivityModal = ({ ...props }) => {
                         </Form.Group>
                         <Form.Field required width='12'>
                             <label>Description</label>
-                            <textarea name='description' placeholder='Description' ref={register({ required: true })} />
+                            <textarea data-testid='descriptionInput' name='description' placeholder='Description' ref={register({ required: true })} />
                             {
                                 errors.description &&
-                                <div class="ui pointing up prompt label" role="alert">
+                                <div className="ui pointing up prompt label" role="alert">
                                     Description is required
                                 </div>
                             }
                         </Form.Field>
                     </Modal.Content>
                     <Modal.Actions style={{ marginTop: 30 }}>
-                        <Button color='grey' onClick={() => setOpen(false)}>
+                        <Button color='grey' onClick={() => onCloseOrCancelClick()}>
                             <Icon name='cancel' /> CANCEL
                         </Button>
-                        <Button color='blue' disabled={errors.title || errors.fee || errors.description}>
+                        <Button color='blue' disabled={isDisabled}>
                             <Icon name='checkmark' /> ADD
                         </Button>
                     </Modal.Actions>
