@@ -3,7 +3,7 @@ import { Icon, Grid, Popup } from 'semantic-ui-react';
 import MenuItem from '../util/MenuItem';
 
 const ActivityActionsMenu = ({ ...props }) => {
-    const { onAddExpenseClick, onPayBalanceClick } = props;
+    const { activityTitle, onAddExpenseClick, onPayBalanceClick } = props;
     const menuItems = [
         {
             iconName: 'dollar',
@@ -30,7 +30,7 @@ const ActivityActionsMenu = ({ ...props }) => {
                     menuItems.map((menuItem) => {
                         const { iconName, displayText, func } = menuItem
                         return <Grid.Row key={iconName} style={{ color: '#00467d', fontWeight: 'bold'}}>
-                                   <MenuItem iconName={iconName} displayText={displayText} func={func} />
+                                   <MenuItem iconName={iconName} displayText={displayText} func={func} activityTitle={activityTitle} />
                                 </Grid.Row>
                     })
                 }

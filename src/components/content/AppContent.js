@@ -49,7 +49,36 @@ const AppContent = () => {
             />
     }
 
-    const handleAddExpenseClick = () => console.log('Added expense');
+    const handleAddExpenseClick = async (activityTitle) => {
+        const activityToUpdate = activityList.filter(activity => activity.title === activityTitle)[0];
+        console.log('Adding expense for', activityToUpdate);
+
+        const updateBalanceRequest = {
+            title: activityTitle,
+            balance: activityToUpdate.fee + activityToUpdate.balance
+        };
+
+        let { data, error } = await Request.sendRequest({ url: API_URL, method: 'PATCH', request: updateBalanceRequest })
+
+        if(data) {
+            const activities = activityList.map(activity => {
+                if(activity.title === activityTitle) {
+                    return {title: activity.title, description: activity.description, fee: data.fee, balance: data.balance}
+                }
+                return activity;
+            })
+            setActivityList(activities);
+        } else if(error) {
+            setErrMsg('An Error occured while loading Activity List');
+            <Message
+                    error
+                    header='Bummer!'
+                    icon='frown outline'
+                    content={errMsg}
+                />
+        }
+
+    };
     const handlePayBalanceClick = () => console.log('Paid balance');
     const handleAddActivityClick = async (activity) => {
         console.log('submitting add activity request', activity);
